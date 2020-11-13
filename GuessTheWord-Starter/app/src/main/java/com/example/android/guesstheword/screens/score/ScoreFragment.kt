@@ -20,6 +20,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -49,10 +50,8 @@ class ScoreFragment : Fragment() {
 
         val scoreViewModelFactory = ScoreViewModelFactory(ScoreFragmentArgs.fromBundle(requireArguments()).score)
         val viewModel = ViewModelProvider(this, scoreViewModelFactory).get(ScoreViewModel::class.java)
-
-        viewModel.score.observe(viewLifecycleOwner, {
-            binding.scoreText.text = it.toString()
-        })
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         viewModel.eventPlayAgain.observe(viewLifecycleOwner, {
             if(it) {
@@ -60,11 +59,6 @@ class ScoreFragment : Fragment() {
                 viewModel.onPlayAgainComplete()
             }
         })
-
-        binding.playAgainButton.setOnClickListener{
-            viewModel.onPlayAgain()
-//            findNavController().navigate(ScoreFragmentDirections.actionRestart())
-        }
 
         return binding.root
     }
