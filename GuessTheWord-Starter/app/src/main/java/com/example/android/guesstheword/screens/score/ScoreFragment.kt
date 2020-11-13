@@ -23,6 +23,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.android.guesstheword.R
 import com.example.android.guesstheword.databinding.ScoreFragmentBinding
@@ -48,7 +49,22 @@ class ScoreFragment : Fragment() {
 
         val scoreViewModelFactory = ScoreViewModelFactory(ScoreFragmentArgs.fromBundle(requireArguments()).score)
         val viewModel = ViewModelProvider(this, scoreViewModelFactory).get(ScoreViewModel::class.java)
-        binding.scoreText.text = viewModel.score.toString()
+
+        viewModel.score.observe(viewLifecycleOwner, {
+            binding.scoreText.text = it.toString()
+        })
+
+        viewModel.eventPlayAgain.observe(viewLifecycleOwner, {
+            if(it) {
+                findNavController().navigate(ScoreFragmentDirections.actionRestart())
+                viewModel.onPlayAgainComplete()
+            }
+        })
+
+        binding.playAgainButton.setOnClickListener{
+            viewModel.onPlayAgain()
+//            findNavController().navigate(ScoreFragmentDirections.actionRestart())
+        }
 
         return binding.root
     }
