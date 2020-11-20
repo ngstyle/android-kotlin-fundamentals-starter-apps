@@ -51,10 +51,10 @@ class SleepTrackerFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
 
         // Get a reference to the binding object and inflate the fragment views.
-        val binding: FragmentSleepTrackerBinding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_sleep_tracker, container, false)
+//        val binding: FragmentSleepTrackerBinding = DataBindingUtil.inflate(
+//                inflater, R.layout.fragment_sleep_tracker, container, false)
 
-//        val binding: FragmentSleepTrackerBinding = FragmentSleepTrackerBinding.inflate(inflater, container, false)
+        val binding = FragmentSleepTrackerBinding.inflate(inflater, container, false)
 
         val application = requireNotNull(this.activity).application
 
