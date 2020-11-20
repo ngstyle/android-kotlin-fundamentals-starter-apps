@@ -54,6 +54,8 @@ class SleepTrackerFragment : Fragment() {
         val binding: FragmentSleepTrackerBinding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_sleep_tracker, container, false)
 
+//        val binding: FragmentSleepTrackerBinding = FragmentSleepTrackerBinding.inflate(inflater, container, false)
+
         val application = requireNotNull(this.activity).application
 
         // Create an instance of the ViewModel Factory.
@@ -104,6 +106,15 @@ class SleepTrackerFragment : Fragment() {
                 // Reset state to make sure we only navigate once, even if the device
                 // has a configuration change.
                 sleepTrackerViewModel.doneNavigating()
+            }
+        })
+
+
+        val adapter = SleepNightAdapter()
+        binding.sleepList.adapter = adapter
+        sleepTrackerViewModel.nights.observe(viewLifecycleOwner, {
+            it?.let {
+                adapter.submitList(it)
             }
         })
         return binding.root
