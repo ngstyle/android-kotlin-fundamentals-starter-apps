@@ -25,11 +25,16 @@ import com.example.android.marsrealestate.network.MarsApi
 import com.example.android.marsrealestate.network.MarsProperty
 import kotlinx.coroutines.launch
 
+enum class MarsApiStatus { LOADING, ERROR, DONE }
 /**
  * The [ViewModel] that is attached to the [OverviewFragment].
  */
 class OverviewViewModel : ViewModel() {
 
+    private val _status = MutableLiveData<MarsApiStatus>()
+
+    val status: LiveData<MarsApiStatus>
+        get() = _status
 
     private val _properties = MutableLiveData<List<MarsProperty>>()
     val properties: LiveData<List<MarsProperty>>
@@ -47,12 +52,13 @@ class OverviewViewModel : ViewModel() {
      */
     private fun getMarsRealEstateProperties() {
         viewModelScope.launch {
+            _status.value = MarsApiStatus.LOADING
             try {
                 _properties.value = MarsApi.retrofitService.getProperties()
-                println("nohc: " + properties.value!![0].imgSrcUrl)
+                _status.value = MarsApiStatus.DONE
             } catch (e: Exception) {
                 _properties.value = ArrayList()
-                println("nohc: " + e.message)
+                _status.value = MarsApiStatus.ERROR
             }
         }
     }
