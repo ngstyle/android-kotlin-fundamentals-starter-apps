@@ -98,8 +98,7 @@ class DevByteFragment : Fragment() {
                 container,
                 false)
         // Set the lifecycleOwner so DataBinding can observe LiveData
-        binding.setLifecycleOwner(viewLifecycleOwner)
-
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
         viewModelAdapter = DevByteAdapter(VideoClick {
@@ -119,10 +118,14 @@ class DevByteFragment : Fragment() {
             startActivity(intent)
         })
 
-        binding.root.findViewById<RecyclerView>(R.id.recycler_view).apply {
+        binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = viewModelAdapter
         }
+//        binding.root.findViewById<RecyclerView>(R.id.recycler_view).apply {
+//            layoutManager = LinearLayoutManager(context)
+//            adapter = viewModelAdapter
+//        }
 
 
         // Observer for the network error.

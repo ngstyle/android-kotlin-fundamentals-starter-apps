@@ -54,7 +54,6 @@
                 android:id="@+id/right_well"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:orientation="vertical"
                 app:layout_constraintGuide_end="8dp" />
 
@@ -109,7 +108,7 @@
                 android:cropToPadding="false"
                 android:scaleType="centerCrop"
                 app:imageUrl="@{video.thumbnail}"
-                app:layout_constraintDimensionRatio="h,4:3"
+                app:layout_constraintDimensionRatio="h,56:31"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
