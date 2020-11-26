@@ -40,7 +40,7 @@ abstract class VideosDatabase : RoomDatabase() {
         @Volatile
         private lateinit var INSTANCE: VideosDatabase
 
-        fun getDataBase(context: Context): VideosDatabase {
+        fun getDatabase(context: Context): VideosDatabase {
             synchronized(this) {
                 if (!::INSTANCE.isInitialized) {
                     INSTANCE = Room.databaseBuilder(context, VideosDatabase::class.java, "videos").build()
