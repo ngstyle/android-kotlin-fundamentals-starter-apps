@@ -44,12 +44,21 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/behind" />
 
+
+            <!--  Important:
+                    When you have both themes and styles manipulating text,
+                    you must apply the text properties as a textAppearance attribute
+                    if you want the text properties in the theme to override
+                    what's set and inherited in the style.-->
+
             <TextView
                 android:id="@+id/title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:fontFamily="serif-monospace"
                 android:text="@string/about_google_developer_groups"
+                android:textAppearance="@style/TextAppearance.Title"
                 app:layout_constraintEnd_toStartOf="@+id/end_guideline"
                 app:layout_constraintStart_toStartOf="@+id/start_guideline"
                 app:layout_constraintTop_toBottomOf="@id/image" />
@@ -70,6 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
                 android:text="@string/gdgs_are"
+                android:textAppearance="@style/TextAppearance.Title"
                 app:layout_constraintEnd_toStartOf="@id/end_guideline"
                 app:layout_constraintStart_toEndOf="@id/start_guideline"
                 app:layout_constraintTop_toBottomOf="@+id/intro_text" />
@@ -91,7 +101,7 @@
                 android:layout_marginTop="16dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="3:1.5"
+                app:layout_constraintDimensionRatio="2:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/description"
