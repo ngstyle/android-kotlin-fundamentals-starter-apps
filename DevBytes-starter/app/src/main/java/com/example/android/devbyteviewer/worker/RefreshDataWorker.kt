@@ -6,6 +6,7 @@ import androidx.work.WorkerParameters
 import com.example.android.devbyteviewer.database.VideosDatabase
 import com.example.android.devbyteviewer.repository.VideosRepository
 import retrofit2.HttpException
+import timber.log.Timber
 
 /**
  * Created by chon on 11/26/20.
@@ -19,6 +20,7 @@ class RefreshDataWorker(appContext: Context, params: WorkerParameters) :
         val repository = VideosRepository(database)
         try {
             repository.refreshVideos()
+            Timber.d("Work request for sync is run")
         } catch (e: HttpException) {
             return Result.retry()
         }
